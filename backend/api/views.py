@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from lexpy.dawg import DAWG
 import itertools
 import os
-from .helper import handleWildCard
+from .helper import handleWildCard, countPoints
 
 dawg = DAWG()
 loc = os.path.join(os.path.dirname(
@@ -17,7 +17,6 @@ for i in newfile:
     x, y = i.split(maxsplit=1)
     csw[x] = y
     dawg.add(x)
-    csw = {}
 
 
 def getWords(request, word):
@@ -133,4 +132,22 @@ def getContaining(request, word):
 
     for keys in dictionary:
         dictionary[keys] = list(dictionary[keys])
+    return JsonResponse(dictionary, safe=False)
+
+
+def getDefinition(request, word):
+    dictionary = {}
+    word = word.upper()
+    description = csw[word]
+    if '[' in description:
+        partOfSpeech = description[description.index(
+            '[')+1:description.index(']')].split(" ")[0]
+        definition = description.split('[')[0]
+        dictionary["definition"] = definition
+        dictionary["partOfSpeech"] = partOfSpeech
+        dictionary["points"] = countPoints(word)
+    else:
+        dictionary["definition"] = description
+        dictionary["partOfSpeech"] = "n"
+        dictionary["points"] = countPoints(word)
     return JsonResponse(dictionary, safe=False)

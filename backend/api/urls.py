@@ -7,5 +7,6 @@ urlpatterns = [
     path('startingwith/<str:word>', views.getStartingWith, name='startingwith'),
     path('endingwith/<str:word>', views.getEndingWith, name='endingwith'),
     path('containing/<str:word>', views.getContaining, name='containingwith'),
+    path('definition/<str:word>', views.getDefinition, name='containingwith'),
 
 ]
