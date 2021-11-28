@@ -143,6 +143,7 @@ def getDefinition(request, word):
         partOfSpeech = description[description.index(
             '[')+1:description.index(']')].split(" ")[0]
         definition = description.split('[')[0]
+        
         dictionary["definition"] = definition
         dictionary["partOfSpeech"] = partOfSpeech
         dictionary["points"] = countPoints(word)
