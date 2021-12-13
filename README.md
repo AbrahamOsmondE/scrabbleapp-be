@@ -4,10 +4,10 @@ Utilizes a Double Acyclic Word Graph for fast and efficient lookup and word stor
 
 Endpoints:
 ### /api/wordbuilder/<str:word>
-Returns every possible words that can be made by the letters given in <str:word>. 
-Example:  
-/api/wordbuilder/rain. 
-{"2": ["NA", "IN", "AR", "AI", "AN"], "3": ["RIA", "ANI", "RAN", "RAI", "AIN", "RIN", "AIR"], "4": ["AIRN", "RANI", "RAIN"]}. 
+Returns every possible words that can be made by the letters given in <str:word> <br />
+Example: <br />
+/api/wordbuilder/rain <br />
+{"2": ["NA", "IN", "AR", "AI", "AN"], "3": ["RIA", "ANI", "RAN", "RAI", "AIN", "RIN", "AIR"], "4": ["AIRN", "RANI", "RAIN"]} <br />
 
 ### /api/anagram/<str:word>. 
 Returns every possible anagram of the word given in <str:word> <br />
@@ -19,7 +19,7 @@ Example:<br />
 Returns every possible word that starts with <str:word><br />
 Example:<br />
 /api/startingwith/rain<br />
-{"4": ["RAIN"], "8": ["RAINDATE", "RAINSUIT", "RAINCOAT", "RAINFALL", "RAINBOWS", "RAINDROP", "RAINIEST", "RAINLESS", "RAINWEAR", "RAINWASH", "RAINBIRD", "RAINBAND", "RAINOUTS", "RAINBOWY"], "9": ["RAININESS", "RAINSTORM", "RAINFALLS", "RAINTIGHT", "RAINDROPS", "RAINSWEPT", "RAINMAKER", "RAINSTICK", "RAINWEARS", "RAINDATES", "RAINBOWED", "RAINCOATS", "RAINPROOF", "RAINWATER", "RAINCHECK", "RAINBIRDS", "RAINBANDS", "RAINSUITS", "RAINSPOUT"], "7": ["RAINBOW", "RAINILY", "RAINING", "RAINIER", "RAINOUT"], "10": ["RAINCHECKS", "RAINFOREST", "RAINSPOUTS", "RAINWASHES", "RAINBOWIER", "RAINMAKERS", "RAINPROOFS", "RAINMAKING", "RAINSQUALL", "RAINSTORMS", "RAINWASHED", "RAINSTICKS", "RAINWATERS"], "11": ["RAINPROOFED", "RAINBOWIEST", "RAINSQUALLS", "RAINMAKINGS", "RAINWASHING", "RAININESSES", "RAINBOWLIKE", "RAINFORESTS"], "5": ["RAINS", "RAINE", "RAINY"], "6": ["RAINED", "RAINES"], "12": ["RAINPROOFING"]}<br />
+{"4": ["RAIN"], "8": ["RAINDATE", "RAINSUIT", "RAINCOAT", "RAINFALL", "RAINBOWS", "RAINDROP", "RAINIEST", "RAINLESS", "RAINWEAR", "RAINWASH", "RAINBIRD", "RAINBAND", "RAINOUTS", "RAINBOWY"], "9": ["RAININESS", "RAINSTORM", "RAINFALLS", "RAINTIGHT", "RAINDROPS", "RAINSWEPT", "RAINMAKER", "RAINSTICK", "RAINWEARS", "RAINDATES", "RAINBOWED", "RAINCOATS", "RAINPROOF", "RAINWATER",...} <br />
 
 ### /api/endingwith/<str:word>
 Returns every word that ends with <str:word><br />
