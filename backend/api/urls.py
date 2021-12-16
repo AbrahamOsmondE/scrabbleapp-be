@@ -8,5 +8,5 @@ urlpatterns = [
     path('endingwith/<str:word>', views.getEndingWith, name='endingwith'),
     path('containing/<str:word>', views.getContaining, name='containingwith'),
     path('definition/<str:word>', views.getDefinition, name='containingwith'),
-
+    path('solve/<str:rack>/', views.solveBoard, name='solve')
 ]
