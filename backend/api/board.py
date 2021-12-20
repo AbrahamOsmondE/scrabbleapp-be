@@ -93,19 +93,12 @@ class Board:
         point = 0
         row, col = pos
         word_multiplier = 1
-        letter_multipler = 1
 
         if board_symbol == 'TW':
             word_multiplier *= 3
 
         elif board_symbol == 'DW':
             word_multiplier *= 2
-
-        elif board_symbol == 'TL':
-            letter_multipler *= 3
-
-        elif board_symbol == 'DL':
-            letter_multipler *= 2
 
         if self.point_board[row][col] in set('ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
             return point
@@ -135,10 +128,13 @@ class Board:
 
                 if board_character in self.point_table:
                     point += self.point_table[board_character]
+        print((point + letter_score)
+              * word_multiplier, "sideway")
 
-        return (point + letter_score*letter_multipler)*word_multiplier
+        return (point + letter_score)*word_multiplier
 
     def count_points(self, word, direction, start, end):
+        print(word, start, end)
         points = 0
         sideway_points = 0
         multiplier = 1
@@ -173,13 +169,12 @@ class Board:
                 index += 1
 
         bingo = 50 if word_length == 7 else 0
-
+        print(points*multiplier + bingo, "main")
         return points*multiplier + bingo + sideway_points
 
 
 def sample_board():
     result = Board(15)
-    result.set_tile((1, 1), 'A')
-    result.set_tile((1, 2), 'A')
-    result.set_tile((1, 3), 'F')
+    result.set_tile((2, 5), 'E')
+    result.set_tile((2, 6), 'A')
     return result
