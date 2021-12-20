@@ -128,13 +128,10 @@ class Board:
 
                 if board_character in self.point_table:
                     point += self.point_table[board_character]
-        print((point + letter_score)
-              * word_multiplier, "sideway")
 
         return (point + letter_score)*word_multiplier
 
     def count_points(self, word, direction, start, end):
-        print(word, start, end)
         points = 0
         sideway_points = 0
         multiplier = 1
@@ -169,7 +166,7 @@ class Board:
                 index += 1
 
         bingo = 50 if word_length == 7 else 0
-        print(points*multiplier + bingo, "main")
+
         return points*multiplier + bingo + sideway_points
 
 
