@@ -7,6 +7,7 @@ import itertools
 import os
 from .helper import handleWildCard, countPoints
 from django.http import QueryDict
+import random
 
 dawg = DAWG()
 loc = os.path.join(os.path.dirname(
@@ -14,14 +15,18 @@ loc = os.path.join(os.path.dirname(
 newfile = open(loc)
 csw = {}
 words = []
+seven_letter_words = []
 for i in newfile:
     i = i.replace('\n', '')
     word, definition = i.split(maxsplit=1)
     csw[word] = definition
     dawg.add(word)
     words.append(word)
+    if len(word) == 7:
+        seven_letter_words.append(word)
 
 CSWTree = LetterTree(words)
+del words
 example_board = sample_board()
 actual_board = Board(15)
 
@@ -196,3 +201,21 @@ def solveBoard(request, rack):
         answer = solver.answer[:min(len(solver.answer), 50)]
 
         return JsonResponse(answer, safe=False)
+
+
+def getPuzzle(request):
+    puzzle = {}
+    dictionary = {}
+    seven_letter_word = "".join(sorted(random.choice(seven_letter_words)))
+    for combination in [''.join(j) for i in range(1, 8) for j in itertools.permutations(seven_letter_word, i) if ''.join(j) in dawg]:
+        if len(combination) in dictionary:
+            dictionary[len(combination)].add(combination)
+        else:
+            dictionary[len(combination)] = set([combination])
+
+    for keys in dictionary:
+        dictionary[keys] = list(dictionary[keys])
+
+    puzzle["word"] = seven_letter_word
+    puzzle["solutions"] = dictionary
+    return JsonResponse(puzzle, safe=False)
