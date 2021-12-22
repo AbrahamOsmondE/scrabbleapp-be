@@ -108,20 +108,25 @@ class Board:
         while start[moving_index] > 0:
             start[moving_index] -= 1
 
-            if self.point_board[start[0]][start[1]] not in set('ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
+            if start[0] >= 0 and start[1] >= 0 and self.point_board[start[0]][start[1]] not in set('ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
                 start[moving_index] += 1
                 break
 
         while end[moving_index] < self.size:
             end[moving_index] += 1
 
-            if self.point_board[end[0]][end[1]] not in set('ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
+            if end[0] < self.size and end[1] < self.size and self.point_board[end[0]][end[1]] not in set('ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
                 end[moving_index] -= 1
                 break
 
         if start[moving_index] == end[moving_index]:
             return point
 
+        if end[moving_index] == self.size:
+            end[moving_index] -= 1
+
+        if start[moving_index] == self.size:
+            start[moving_index] -= 1
         for i in range(start[0], end[0]+1):
             for j in range(start[1], end[1]+1):
                 board_character = self.point_board[i][j]
