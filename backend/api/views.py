@@ -215,6 +215,10 @@ def getPuzzle(request):
 
     for keys in dictionary:
         dictionary[keys] = list(dictionary[keys])
+    puzzle["count"] = 0
+    for length in dictionary:
+        dictionary[length].sort()
+        puzzle["count"] += len(dictionary[length])
 
     puzzle["word"] = seven_letter_word
     puzzle["solutions"] = dictionary
