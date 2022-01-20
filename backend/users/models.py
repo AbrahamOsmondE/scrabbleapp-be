@@ -12,7 +12,7 @@ class User(AbstractUser):
     secret_key = models.CharField(
         max_length=255, default=get_random_secret_key)
     google_id = models.CharField(
-        max_length=50, unique=False, db_index=True, blank=True)
+        max_length=50, unique=True, db_index=True, blank=True)
     is_buyer = models.BooleanField(default=True)
     is_seller = models.BooleanField(default=False)
     USERNAME_FIELD = 'email'

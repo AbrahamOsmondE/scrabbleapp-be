@@ -1,6 +1,8 @@
 from django.db import transaction
 from django.core.management.utils import get_random_secret_key
 
+from datetime import datetime
+
 from users.models import User
 
 
@@ -35,6 +37,13 @@ def user_create_superuser(email, password=None, **extra_fields) -> User:
     }
 
     user = user_create(email=email, password=password, **extra_fields)
+
+    return user
+
+
+def user_record_login(*, user: User):
+    user.last_login = datetime.now()
+    user.save()
 
     return user
 
