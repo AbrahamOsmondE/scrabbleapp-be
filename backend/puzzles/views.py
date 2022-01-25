@@ -9,10 +9,12 @@ from users.models import User
 from .serializers import PuzzleSerializer
 
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework.decorators import api_view, authentication_classes
 
 
 @api_view(['POST'])
+@authentication_classes([JSONWebTokenAuthentication])
 def submitPuzzle(request):
     serializer = PuzzleSerializer(data=request.data)
     if serializer.is_valid():

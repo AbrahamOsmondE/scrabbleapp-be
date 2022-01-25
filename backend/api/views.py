@@ -9,6 +9,9 @@ from .helper import handleWildCard, countPoints
 from django.http import QueryDict
 import random
 
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework.decorators import api_view, authentication_classes
+
 dawg = DAWG()
 loc = os.path.join(os.path.dirname(
     os.path.dirname(__file__)), 'api', 'worddef.txt')

@@ -2,10 +2,12 @@ from django.shortcuts import render
 import requests
 
 from django.conf import settings
+
+from .models import User
 from .authentication import google_validate_id_token, jwt_login
 
 from .selector import user_get_me
-from .serializers import UserSerializer
+from .serializers import UserPuzzleSerializer, UserSerializer
 from .services import user_get_or_create
 
 from rest_framework.decorators import api_view
@@ -30,3 +32,16 @@ def login(request, *args, **kwargs):
     response = jwt_login(response=response, user=user)
 
     return response
+
+
+@api_view(['GET', 'OPTIONS'])
+def getUserPuzzle(request, userid):
+
+    print(userid)
+
+    user = User.objects.get(google_id=userid)
+    serializer = UserPuzzleSerializer(user)
+
+    print(serializer.data)
+
+    return Response(serializer.data)

@@ -4,7 +4,8 @@ from users.models import User
 
 
 class Puzzle(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, related_name='puzzles',
+                             on_delete=models.CASCADE, null=True)
     letters = models.CharField(max_length=7, blank=False)
     errors = models.IntegerField()
     correct_answers = models.IntegerField()
