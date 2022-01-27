@@ -35,10 +35,8 @@ def login(request, *args, **kwargs):
 
 
 @api_view(['GET', 'OPTIONS'])
-def getUserPuzzle(request, userid):
-
-    print(userid)
-
+def getUserPuzzle(request):
+    userid = request.GET.get('google_id')
     user = User.objects.get(google_id=userid)
     serializer = UserPuzzleSerializer(user)
 

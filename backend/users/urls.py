@@ -4,5 +4,5 @@ from django.urls import path
 
 urlpatterns = [
     path('login', views.login, name='login'),
-    path('userpuzzle/<str:userid>', views.getUserPuzzle, name='userpuzzle')
+    path('userpuzzle', views.getUserPuzzle, name='userpuzzle')
 ]
