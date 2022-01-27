@@ -125,6 +125,8 @@ USE_TZ = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://liscrabble.org",
+    "https://liscrabble.org"
 ]
 
 GOOGLE_OAUTH2_CLIENT_ID = env('DJANGO_GOOGLE_OAUTH2_CLIENT_ID')
