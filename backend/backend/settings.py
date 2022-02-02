@@ -101,7 +101,7 @@ DATABASES = {
         'HOST': env('HOST'),
         'PORT': env('PORT'),
     }
-    }}
+}
 
 
 # Password validation
