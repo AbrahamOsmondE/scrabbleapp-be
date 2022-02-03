@@ -24,7 +24,6 @@ from api.helper import handleWildCard, countPoints
 env = environ.Env()
 environ.Env.read_env()
 
-dawg = DAWG()
 loc = os.path.join(os.path.dirname(
     os.path.dirname(__file__)), 'api', 'worddef.txt')
 newfile = open(loc)
@@ -35,11 +34,10 @@ for i in newfile:
     i = i.replace('\n', '')
     word, definition = i.split(maxsplit=1)
     csw[word] = definition
-    dawg.add(word)
     words.append(word)
     if len(word) == 7:
         seven_letter_words.append(word)
-
+newfile.close()
 CSWTree = LetterTree(words)
 del words
 example_board = sample_board()
