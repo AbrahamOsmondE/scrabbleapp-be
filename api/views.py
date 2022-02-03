@@ -1,13 +1,14 @@
 from django.http.response import HttpResponse, JsonResponse
 from .solver import SolveState
 from .tree import LetterTree
+from .board import Board
 from lexpy.dawg import DAWG
 import itertools
 import os
 from .helper import handleWildCard, countPoints
 from django.http import QueryDict
 import random
-from backend.settings import CSWTree, seven_letter_words, csw
+from backend.settings import CSWTree, csw  # seven_letter_words
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes
 
@@ -188,7 +189,8 @@ def solveBoard(request, rack):
 def getPuzzle(request):
     puzzle = {}
     dictionary = {}
-    seven_letter_word = "".join(sorted(random.choice(seven_letter_words)))
+    # "".join(sorted(random.choice(seven_letter_words)))
+    seven_letter_word = "RETAINS"
     for combination in [''.join(j) for i in range(1, 8) for j in itertools.permutations(seven_letter_word, i) if CSWTree.is_word(''.join(j))]:
         if len(combination) in dictionary:
             dictionary[len(combination)].add(combination)
