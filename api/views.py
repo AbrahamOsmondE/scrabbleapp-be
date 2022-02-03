@@ -172,7 +172,7 @@ def solveBoard(request, rack):
 
     else:
         words = set()
-        for combination in [''.join(j) for i in range(1, len(rack) + 1) for j in itertools.permutations(rack, i) if ''.join(j) in dawg]:
+        for combination in [''.join(j) for i in range(1, len(rack) + 1) for j in itertools.permutations(rack, i) if CSWTree.is_word(''.join(j))]:
             words.add(combination)
         words = list(words)
 
@@ -190,7 +190,7 @@ def getPuzzle(request):
     puzzle = {}
     dictionary = {}
     seven_letter_word = "".join(sorted(random.choice(seven_letter_words)))
-    for combination in [''.join(j) for i in range(1, 8) for j in itertools.permutations(seven_letter_word, i) if ''.join(j) in dawg]:
+    for combination in [''.join(j) for i in range(1, 8) for j in itertools.permutations(seven_letter_word, i) if CSWTree.is_word(''.join(j))]:
         if len(combination) in dictionary:
             dictionary[len(combination)].add(combination)
         else:
