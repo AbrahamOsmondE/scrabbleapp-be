@@ -141,7 +141,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://liscrabble.org",
     "https://liscrabble.org",
     "http://www.liscrabble.org",
-    "https://www.liscrabble.org"
+    "https://www.liscrabble.org",
+    "http://liscrabble.org/",
+    "https://liscrabble.org/",
+    "http://www.liscrabble.org/",
+    "https://www.liscrabble.org/",
 ]
 
 GOOGLE_OAUTH2_CLIENT_ID = env('DJANGO_GOOGLE_OAUTH2_CLIENT_ID')
