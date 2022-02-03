@@ -1,5 +1,4 @@
 from django.http.response import HttpResponse, JsonResponse
-from .board import Board, sample_board
 from .solver import SolveState
 from .tree import LetterTree
 from lexpy.dawg import DAWG
@@ -8,7 +7,7 @@ import os
 from .helper import handleWildCard, countPoints
 from django.http import QueryDict
 import random
-from backend.settings import CSWTree, example_board, actual_board, seven_letter_words, csw
+from backend.settings import CSWTree, seven_letter_words, csw
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes
 

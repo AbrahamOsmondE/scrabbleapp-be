@@ -5,15 +5,16 @@ class LetterTreeNode:
 
 
 class LetterTree:
-    def __init__(self, words):
+    def __init__(self):
         self.root = LetterTreeNode(False)
-        for word in words:
-            current_node = self.root
-            for letter in word:
-                if letter not in current_node.children.keys():
-                    current_node.children[letter] = LetterTreeNode(False)
-                current_node = current_node.children[letter]
-            current_node.is_word = True
+
+    def add_word(self, word):
+        current_node = self.root
+        for letter in word:
+            if letter not in current_node.children.keys():
+                current_node.children[letter] = LetterTreeNode(False)
+            current_node = current_node.children[letter]
+        current_node.is_word = True
 
     def lookup(self, word):
         current_node = self.root

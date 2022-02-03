@@ -173,10 +173,3 @@ class Board:
         bingo = 50 if word_length == 7 else 0
 
         return points*multiplier + bingo + sideway_points
-
-
-def sample_board():
-    result = Board(15)
-    result.set_tile((2, 5), 'E')
-    result.set_tile((2, 6), 'A')
-    return result
