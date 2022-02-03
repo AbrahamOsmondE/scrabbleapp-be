@@ -17,8 +17,6 @@ import django_on_heroku
 from api.solver import SolveState
 from api.tree import LetterTree
 from lexpy.dawg import DAWG
-import itertools
-from api.helper import handleWildCard, countPoints
 
 env = environ.Env()
 environ.Env.read_env()

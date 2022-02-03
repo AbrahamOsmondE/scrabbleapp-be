@@ -9,7 +9,7 @@ from .helper import handleWildCard, countPoints
 from django.http import QueryDict
 import random
 from backend.settings import CSWTree, csw  # seven_letter_words
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+import random
 from rest_framework.decorators import api_view, authentication_classes
 
 
@@ -190,7 +190,10 @@ def getPuzzle(request):
     puzzle = {}
     dictionary = {}
     # "".join(sorted(random.choice(seven_letter_words)))
-    seven_letter_word = "RETAINS"
+    letters = ["A"]*9 + ["B"]*2 + ["C"]*2 + ["D"]*4 + ["E"]*12 + ["F"]*2 + ["G"]*3 + ["H"]*2 + ["I"]*9 + ["J"]+["K"] + \
+        ["L"]*4 + ["M"]*2+["N"]*6+["O"]*8+["P"]*2+["Q"]+["R"]*6 + \
+        ["S"]*4+["T"]*6+["U"]*4+["V"]*2+["W"]*2+["X"]+["Y"]*2+["Z"]
+    seven_letter_word = "".join(random.sample(letters, 7))
     for combination in [''.join(j) for i in range(1, 8) for j in itertools.permutations(seven_letter_word, i) if CSWTree.is_word(''.join(j))]:
         if len(combination) in dictionary:
             dictionary[len(combination)].add(combination)
