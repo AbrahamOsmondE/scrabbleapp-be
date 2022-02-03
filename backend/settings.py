@@ -136,17 +136,19 @@ USE_L10N = True
 
 USE_TZ = True
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://liscrabble.org",
-    "https://liscrabble.org",
-    "http://www.liscrabble.org",
-    "https://www.liscrabble.org",
-    "http://liscrabble.org/",
-    "https://liscrabble.org/",
-    "http://www.liscrabble.org/",
-    "https://www.liscrabble.org/",
-]
+CORS_ORIGIN_ALLOW_ALL = True
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+#     "http://liscrabble.org",
+#     "https://liscrabble.org",
+#     "http://www.liscrabble.org",
+#     "https://www.liscrabble.org",
+#     "http://liscrabble.org/",
+#     "https://liscrabble.org/",
+#     "http://www.liscrabble.org/",
+#     "https://www.liscrabble.org/",
+# ]
 
 GOOGLE_OAUTH2_CLIENT_ID = env('DJANGO_GOOGLE_OAUTH2_CLIENT_ID')
 GOOGLE_OAUTH2_CLIENT_SECRET = env('DJANGO_GOOGLE_OAUTH2_CLIENT_SECRET')
