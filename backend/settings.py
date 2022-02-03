@@ -14,10 +14,36 @@ from pathlib import Path
 import environ
 import os
 import django_on_heroku
+from api.board import Board, sample_board
+from api.solver import SolveState
+from api.tree import LetterTree
+from lexpy.dawg import DAWG
+import itertools
+from api.helper import handleWildCard, countPoints
 
 env = environ.Env()
 environ.Env.read_env()
 
+dawg = DAWG()
+loc = os.path.join(os.path.dirname(
+    os.path.dirname(__file__)), 'api', 'worddef.txt')
+newfile = open(loc)
+csw = {}
+words = []
+seven_letter_words = []
+for i in newfile:
+    i = i.replace('\n', '')
+    word, definition = i.split(maxsplit=1)
+    csw[word] = definition
+    dawg.add(word)
+    words.append(word)
+    if len(word) == 7:
+        seven_letter_words.append(word)
+
+CSWTree = LetterTree(words)
+del words
+example_board = sample_board()
+actual_board = Board(15)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 

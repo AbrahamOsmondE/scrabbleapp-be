@@ -8,30 +8,9 @@ import os
 from .helper import handleWildCard, countPoints
 from django.http import QueryDict
 import random
-
+from backend.settings import dawg, CSWTree, example_board, actual_board, seven_letter_words, csw
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes
-
-dawg = DAWG()
-loc = os.path.join(os.path.dirname(
-    os.path.dirname(__file__)), 'api', 'worddef.txt')
-newfile = open(loc)
-csw = {}
-words = []
-seven_letter_words = []
-for i in newfile:
-    i = i.replace('\n', '')
-    word, definition = i.split(maxsplit=1)
-    csw[word] = definition
-    dawg.add(word)
-    words.append(word)
-    if len(word) == 7:
-        seven_letter_words.append(word)
-
-CSWTree = LetterTree(words)
-del words
-example_board = sample_board()
-actual_board = Board(15)
 
 
 def getWords(request, word):
@@ -225,4 +204,5 @@ def getPuzzle(request):
 
     puzzle["word"] = seven_letter_word
     puzzle["solutions"] = dictionary
+    del dictionary
     return JsonResponse(puzzle, safe=False)
