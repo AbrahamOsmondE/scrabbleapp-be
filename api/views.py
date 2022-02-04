@@ -13,20 +13,22 @@ import random
 import random
 import dill
 
-with open("csw", "rb") as dill_file:
-    csw = dill.load(dill_file)
+# with open("csw", "rb") as dill_file:
+#     csw = dill.load(dill_file)
 
-with open("CSWTree", "rb") as dill_file:
-    CSWTree = dill.load(dill_file)
+# with open("CSWTree", "rb") as dill_file:
+#     CSWTree = dill.load(dill_file)
 
 # with open("dawg", "rb") as dill_file:
 #     dawg = dill.load(dill_file)
 
-with open("sevenLetterWords", "rb") as dill_file:
-    seven_letter = dill.load(dill_file)
+# with open("sevenLetterWords", "rb") as dill_file:
+#     seven_letter = dill.load(dill_file)
 
 
 def getWords(request, word):
+    with open("CSWTree", "rb") as dill_file:
+        CSWTree = dill.load(dill_file)
     dictionary = {}
     word = word.upper()
     word = word.replace('*', '?')
@@ -143,6 +145,8 @@ def getWords(request, word):
 
 
 def getDefinition(request, word):
+    with open("csw", "rb") as dill_file:
+        csw = dill.load(dill_file)
     dictionary = {}
     word = word.upper()
     description = csw[word]
@@ -162,6 +166,9 @@ def getDefinition(request, word):
 
 
 def solveBoard(request, rack):
+    with open("CSWTree", "rb") as dill_file:
+        CSWTree = dill.load(dill_file)
+
     rack = rack.upper()
     rack = [i for i in rack]
 
@@ -199,6 +206,11 @@ def solveBoard(request, rack):
 
 
 def getPuzzle(request):
+    with open("CSWTree", "rb") as dill_file:
+        CSWTree = dill.load(dill_file)
+
+    with open("sevenLetterWords", "rb") as dill_file:
+        seven_letter = dill.load(dill_file)
     puzzle = {}
     dictionary = {}
     letters = "".join(sorted(random.choice(seven_letter)))
