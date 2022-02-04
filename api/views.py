@@ -19,8 +19,8 @@ with open("csw", "rb") as dill_file:
 with open("CSWTree", "rb") as dill_file:
     CSWTree = dill.load(dill_file)
 
-with open("dawg", "rb") as dill_file:
-    dawg = dill.load(dill_file)
+# with open("dawg", "rb") as dill_file:
+#     dawg = dill.load(dill_file)
 
 with open("sevenLetterWords", "rb") as dill_file:
     seven_letter = dill.load(dill_file)
@@ -51,95 +51,95 @@ def getWords(request, word):
         return JsonResponse(dictionary, safe=False)
 
 
-def getAnagram(request, word):
-    dictionary = {}
-    word = word.upper()
-    word = word.replace('*', '?')
-    if "?" in word:
-        for combination in [''.join(j) for j in itertools.permutations(word, len(word))]:
-            if len(combination) in dictionary:
-                for res in dawg.search(combination):
-                    dictionary[len(combination)].add(res)
-            else:
-                dictionary[len(combination)] = set(dawg.search(combination))
-        for keys in dictionary:
-            dictionary[keys] = list(dictionary[keys])
-    else:
-        for combination in [''.join(j) for j in itertools.permutations(word, len(word)) if ''.join(j) in dawg]:
-            if len(combination) in dictionary:
-                dictionary[len(combination)].add(combination)
-            else:
-                dictionary[len(combination)] = set([combination])
+# def getAnagram(request, word):
+#     dictionary = {}
+#     word = word.upper()
+#     word = word.replace('*', '?')
+#     if "?" in word:
+#         for combination in [''.join(j) for j in itertools.permutations(word, len(word))]:
+#             if len(combination) in dictionary:
+#                 for res in dawg.search(combination):
+#                     dictionary[len(combination)].add(res)
+#             else:
+#                 dictionary[len(combination)] = set(dawg.search(combination))
+#         for keys in dictionary:
+#             dictionary[keys] = list(dictionary[keys])
+#     else:
+#         for combination in [''.join(j) for j in itertools.permutations(word, len(word)) if ''.join(j) in dawg]:
+#             if len(combination) in dictionary:
+#                 dictionary[len(combination)].add(combination)
+#             else:
+#                 dictionary[len(combination)] = set([combination])
 
-        for keys in dictionary:
-            dictionary[keys] = list(dictionary[keys])
-    return JsonResponse(dictionary, safe=False)
-
-
-def getStartingWith(request, word):
-    dictionary = {}
-    word = word.upper().replace('*', '?')
-    word = handleWildCard(word)
-    for i in word:
-        i += "*"
-        for res in dawg.search(i):
-            if len(res) in dictionary:
-                dictionary[len(res)].add(res)
-            else:
-                dictionary[len(res)] = set([res])
-    for keys in dictionary:
-        dictionary[keys] = list(dictionary[keys])
-    return JsonResponse(dictionary, safe=False)
-    # Create your views here.
+#         for keys in dictionary:
+#             dictionary[keys] = list(dictionary[keys])
+#     return JsonResponse(dictionary, safe=False)
 
 
-def getEndingWith(request, word):
-    dictionary = {}
-    word = word.upper().replace('*', '?')
-    word = handleWildCard(word)
-    for i in word:
-        i = "*" + i
-        for res in dawg.search(i):
-            if len(res) in dictionary:
-                dictionary[len(res)].add(res)
-            else:
-                dictionary[len(res)] = set([res])
-    for keys in dictionary:
-        dictionary[keys] = list(dictionary[keys])
-    return JsonResponse(dictionary, safe=False)
+# def getStartingWith(request, word):
+#     dictionary = {}
+#     word = word.upper().replace('*', '?')
+#     word = handleWildCard(word)
+#     for i in word:
+#         i += "*"
+#         for res in dawg.search(i):
+#             if len(res) in dictionary:
+#                 dictionary[len(res)].add(res)
+#             else:
+#                 dictionary[len(res)] = set([res])
+#     for keys in dictionary:
+#         dictionary[keys] = list(dictionary[keys])
+#     return JsonResponse(dictionary, safe=False)
+#     # Create your views here.
 
 
-def getContaining(request, word):
-    dictionary = {}
-    word = word.upper().replace('*', '?')
-    word = handleWildCard(word)
-    for i in word:
-        i += "*"
-        for res in dawg.search(i):
-            if len(res) in dictionary:
-                dictionary[len(res)].add(res)
-            else:
-                dictionary[len(res)] = set([res])
+# def getEndingWith(request, word):
+#     dictionary = {}
+#     word = word.upper().replace('*', '?')
+#     word = handleWildCard(word)
+#     for i in word:
+#         i = "*" + i
+#         for res in dawg.search(i):
+#             if len(res) in dictionary:
+#                 dictionary[len(res)].add(res)
+#             else:
+#                 dictionary[len(res)] = set([res])
+#     for keys in dictionary:
+#         dictionary[keys] = list(dictionary[keys])
+#     return JsonResponse(dictionary, safe=False)
 
-    for i in word:
-        i = "*" + i
-        for res in dawg.search(i):
-            if len(res) in dictionary:
-                dictionary[len(res)].add(res)
-            else:
-                dictionary[len(res)] = set([res])
 
-    for i in word:
-        i = '*' + i + '*'
-        for res in dawg.search(i):
-            if len(res) in dictionary:
-                dictionary[len(res)].add(res)
-            else:
-                dictionary[len(res)] = set([res])
+# def getContaining(request, word):
+#     dictionary = {}
+#     word = word.upper().replace('*', '?')
+#     word = handleWildCard(word)
+#     for i in word:
+#         i += "*"
+#         for res in dawg.search(i):
+#             if len(res) in dictionary:
+#                 dictionary[len(res)].add(res)
+#             else:
+#                 dictionary[len(res)] = set([res])
 
-    for keys in dictionary:
-        dictionary[keys] = list(dictionary[keys])
-    return JsonResponse(dictionary, safe=False)
+#     for i in word:
+#         i = "*" + i
+#         for res in dawg.search(i):
+#             if len(res) in dictionary:
+#                 dictionary[len(res)].add(res)
+#             else:
+#                 dictionary[len(res)] = set([res])
+
+#     for i in word:
+#         i = '*' + i + '*'
+#         for res in dawg.search(i):
+#             if len(res) in dictionary:
+#                 dictionary[len(res)].add(res)
+#             else:
+#                 dictionary[len(res)] = set([res])
+
+#     for keys in dictionary:
+#         dictionary[keys] = list(dictionary[keys])
+#     return JsonResponse(dictionary, safe=False)
 
 
 def getDefinition(request, word):
