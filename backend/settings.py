@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
-from platformdirs import sys
 import environ
 import os
 import django_on_heroku
@@ -24,20 +23,22 @@ import gc
 env = environ.Env()
 environ.Env.read_env()
 
-loc = os.path.join(os.path.dirname(
-    os.path.dirname(__file__)), 'api', 'worddef.txt')
-newfile = open(loc)
-csw = {}
+# loc = os.path.join(os.path.dirname(
+#     os.path.dirname(__file__)), 'api', 'worddef.txt')
+# newfile = open(loc)
+# csw = {}
 # seven_letter_words = []
-CSWTree = LetterTree()
-for i in newfile:
-    i = i.replace('\n', '')
-    word, definition = i.split(maxsplit=1)
-    CSWTree.add_word(word)
-    csw[word] = definition
-    # if len(word) == 7:
-    #     seven_letter_words.append(word)
-newfile.close()
+# CSWTree = LetterTree()
+# dawg = DAWG()
+# for i in newfile:
+#     i = i.replace('\n', '')
+#     word, definition = i.split(maxsplit=1)
+#     CSWTree.add_word(word)
+#     dawg.add(word)
+#     csw[word] = definition
+#     if len(word) == 7:
+#         seven_letter_words.append(word)
+# newfile.close()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
