@@ -32,7 +32,7 @@ gc.enable()
 for i in newfile:
     i = i.replace('\n', '')
     word, definition = i.split(maxsplit=1)
-    # CSWTree.add_word(word)
+    CSWTree.add_word(word)
     csw[word] = definition
     # if len(word) == 7:
     #     seven_letter_words.append(word)
