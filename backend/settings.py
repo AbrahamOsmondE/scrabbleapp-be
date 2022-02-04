@@ -30,7 +30,6 @@ newfile = open(loc)
 csw = {}
 # seven_letter_words = []
 CSWTree = LetterTree()
-gc.enable()
 for i in newfile:
     i = i.replace('\n', '')
     word, definition = i.split(maxsplit=1)
