@@ -24,20 +24,20 @@ environ.Env.read_env()
 
 loc = os.path.join(os.path.dirname(
     os.path.dirname(__file__)), 'api', 'worddef.txt')
-# newfile = open(loc)
-# csw = {}
+newfile = open(loc)
+csw = {}
 # seven_letter_words = []
-# CSWTree = LetterTree()
-# for i in newfile:
-#     i = i.replace('\n', '')
-#     word, definition = i.split(maxsplit=1)
-#     CSWTree.add_word(word)
-#     gc.collect()
-# csw[word] = definition
-# if len(word) == 7:
-#     seven_letter_words.append(word)
-# gc.enable()
-# newfile.close()
+CSWTree = LetterTree()
+for i in newfile:
+    i = i.replace('\n', '')
+    word, definition = i.split(maxsplit=1)
+    # CSWTree.add_word(word)
+    gc.collect()
+    csw[word] = definition
+    # if len(word) == 7:
+    #     seven_letter_words.append(word)
+gc.enable()
+newfile.close()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
