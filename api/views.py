@@ -180,6 +180,10 @@ def solveBoard(request, rack):
         solver.answer.sort(reverse=True, key=lambda i: i['points'])
 
         answer = solver.answer[:min(len(solver.answer), 50)]
+
+        del board
+        del solver
+
         return JsonResponse(answer, safe=False)
 
     else:
@@ -194,7 +198,8 @@ def solveBoard(request, rack):
         solver.answer.sort(reverse=True, key=lambda i: i['points'])
 
         answer = solver.answer[:min(len(solver.answer), 50)]
-
+        del board
+        del solver
         return JsonResponse(answer, safe=False)
 
 
