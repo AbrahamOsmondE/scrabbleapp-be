@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+
+from platformdirs import sys
 import environ
 import os
 import django_on_heroku
@@ -25,7 +27,7 @@ environ.Env.read_env()
 loc = os.path.join(os.path.dirname(
     os.path.dirname(__file__)), 'api', 'worddef.txt')
 newfile = open(loc)
-# csw = {}
+csw = {}
 # seven_letter_words = []
 CSWTree = LetterTree()
 gc.enable()
@@ -33,7 +35,7 @@ for i in newfile:
     i = i.replace('\n', '')
     word, definition = i.split(maxsplit=1)
     CSWTree.add_word(word)
-    # csw[word] = definition
+    csw[word] = definition
     # if len(word) == 7:
     #     seven_letter_words.append(word)
 newfile.close()
