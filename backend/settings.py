@@ -28,15 +28,14 @@ newfile = open(loc)
 csw = {}
 # seven_letter_words = []
 CSWTree = LetterTree()
+gc.enable()
 for i in newfile:
     i = i.replace('\n', '')
     word, definition = i.split(maxsplit=1)
     # CSWTree.add_word(word)
-    gc.collect()
     csw[word] = definition
     # if len(word) == 7:
     #     seven_letter_words.append(word)
-gc.enable()
 newfile.close()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
