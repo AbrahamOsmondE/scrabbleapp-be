@@ -22,19 +22,21 @@ with open("sevenLetterWords", "rb") as dill_file:
 
 
 def getWords(request, word):
-    dictionary = {}
-    word = word.upper()
-    permutations = [''.join(j) for i in range(1, len(word) + 1)
-                    for j in itertools.permutations(word, i) if CSWTree.is_word(''.join(j))]
-    for combination in permutations:
-        if len(combination) in dictionary:
-            dictionary[len(combination)].add(combination)
-        else:
-            dictionary[len(combination)] = set([combination])
-    for keys in dictionary:
-        dictionary[keys] = list(dictionary[keys])
-    del permutations
-    return JsonResponse(dictionary, safe=False)
+    # dictionary = {}
+    # word = word.upper()
+    # permutations = [''.join(j) for i in range(1, len(word) + 1)
+    #                 for j in itertools.permutations(word, i) if CSWTree.is_word(''.join(j))]
+    # for combination in permutations:
+    #     if len(combination) in dictionary:
+    #         dictionary[len(combination)].add(combination)
+    #     else:
+    #         dictionary[len(combination)] = set([combination])
+    # for keys in dictionary:
+    #     dictionary[keys] = list(dictionary[keys])
+    # del permutations
+    # return JsonResponse(dictionary, safe=False)
+    x = CSWTree.is_word(word.upper())
+    return
 
 
 # def getAnagram(request, word):
