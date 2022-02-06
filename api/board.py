@@ -48,7 +48,7 @@ class Board:
                             'L': 1, 'M': 3, 'N': 1, 'O': 1, 'P': 3, 'Q': 10, 'R': 1, 'S': 1, 'T': 1, 'U': 1, 'V': 4, 'W': 4, 'X': 8, 'Y': 4, 'Z': 10, }
 
     def __str__(self):
-        return '\n'.join(''.join(x if x is not None else '_' for x in row) for row in self._tiles)
+        return '\n'.join(''.join(char if char is not None else '_' for char in row) for row in self._tiles)
 
     def all_positions(self):
         result = []

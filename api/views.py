@@ -1,3 +1,4 @@
+from re import X
 from django.http.response import HttpResponse, JsonResponse
 from .solver import SolveState
 from .board import Board
@@ -24,16 +25,16 @@ def getWords(request, word):
     dictionary = {}
     word = word.upper()
     word = word.replace('*', '?')
-    x = [''.join(j) for i in range(1, len(word) + 1)
-         for j in itertools.permutations(word, i) if CSWTree.is_word(''.join(j))]
-    for combination in x:
+    permutations = [''.join(j) for i in range(1, len(word) + 1)
+                    for j in itertools.permutations(word, i) if CSWTree.is_word(''.join(j))]
+    for combination in permutations:
         if len(combination) in dictionary:
             dictionary[len(combination)].add(combination)
         else:
             dictionary[len(combination)] = set([combination])
     for keys in dictionary:
         dictionary[keys] = list(dictionary[keys])
-    del x
+    del permutations
     return JsonResponse(dictionary, safe=False)
 
 
@@ -173,7 +174,9 @@ def solveBoard(request, rack):
 
     else:
         words = set()
-        for combination in [''.join(j) for i in range(1, len(rack) + 1) for j in itertools.permutations(rack, i) if CSWTree.is_word(''.join(j))]:
+        permutations = [''.join(j) for i in range(1, len(rack) + 1)
+                        for j in itertools.permutations(rack, i) if CSWTree.is_word(''.join(j))]
+        for combination in permutations:
             words.add(combination)
         words = list(words)
 
@@ -185,6 +188,8 @@ def solveBoard(request, rack):
         answer = solver.answer[:min(len(solver.answer), 50)]
         del board
         del solver
+        del permutations
+        del words
         return JsonResponse(answer, safe=False)
 
 
@@ -197,14 +202,14 @@ def getPuzzle(request):
     #     ["L"]*4 + ["M"]*2+["N"]*6+["O"]*8+["P"]*2+["Q"]+["R"]*6 + \
     #     ["S"]*4+["T"]*6+["U"]*4+["V"]*2+["W"]*2+["X"]+["Y"]*2+["Z"]
     seven_letter_word = "".join(random.sample(letters, 7))
-    x = [''.join(j) for i in range(1, 8) for j in itertools.permutations(
+    permutations = [''.join(j) for i in range(1, 8) for j in itertools.permutations(
         seven_letter_word, i) if CSWTree.is_word(''.join(j))]
-    for combination in x:
+    for combination in permutations:
         if len(combination) in dictionary:
             dictionary[len(combination)].add(combination)
         else:
             dictionary[len(combination)] = set([combination])
-    del x
+    del permutations
     for keys in dictionary:
         dictionary[keys] = list(dictionary[keys])
     puzzle["count"] = 0
