@@ -1,14 +1,9 @@
 from django.http.response import HttpResponse, JsonResponse
 from .solver import SolveState
-from .tree import LetterTree
 from .board import Board
-from lexpy.dawg import DAWG
 import itertools
-import os
 from .helper import handleWildCard, countPoints
 from django.http import QueryDict
-# from backend.settings import CSWTree, csw
-# seven_letter_words
 import random
 import dill
 
@@ -29,25 +24,17 @@ def getWords(request, word):
     dictionary = {}
     word = word.upper()
     word = word.replace('*', '?')
-    if "?" in word:
-        for combination in [''.join(j) for i in range(2, len(word) + 1) for j in itertools.permutations(word, i)]:
-            if len(combination) in dictionary:
-                if CSWTree.is_word(combination):
-                    dictionary[len(combination)].add(combination)
-            else:
-                if CSWTree.is_word(combination):
-                    dictionary[len(combination)] = set([combination])
-        for keys in dictionary:
-            dictionary[keys] = list(dictionary[keys])
-    else:
-        for combination in [''.join(j) for i in range(1, len(word) + 1) for j in itertools.permutations(word, i) if CSWTree.is_word(''.join(j))]:
-            if len(combination) in dictionary:
-                dictionary[len(combination)].add(combination)
-            else:
-                dictionary[len(combination)] = set([combination])
-        for keys in dictionary:
-            dictionary[keys] = list(dictionary[keys])
-        return JsonResponse(dictionary, safe=False)
+    x = [''.join(j) for i in range(1, len(word) + 1)
+         for j in itertools.permutations(word, i) if CSWTree.is_word(''.join(j))]
+    for combination in x:
+        if len(combination) in dictionary:
+            dictionary[len(combination)].add(combination)
+        else:
+            dictionary[len(combination)] = set([combination])
+    for keys in dictionary:
+        dictionary[keys] = list(dictionary[keys])
+    del x
+    return JsonResponse(dictionary, safe=False)
 
 
 # def getAnagram(request, word):
@@ -210,12 +197,14 @@ def getPuzzle(request):
     #     ["L"]*4 + ["M"]*2+["N"]*6+["O"]*8+["P"]*2+["Q"]+["R"]*6 + \
     #     ["S"]*4+["T"]*6+["U"]*4+["V"]*2+["W"]*2+["X"]+["Y"]*2+["Z"]
     seven_letter_word = "".join(random.sample(letters, 7))
-    for combination in [''.join(j) for i in range(1, 8) for j in itertools.permutations(seven_letter_word, i) if CSWTree.is_word(''.join(j))]:
+    x = [''.join(j) for i in range(1, 8) for j in itertools.permutations(
+        seven_letter_word, i) if CSWTree.is_word(''.join(j))]
+    for combination in x:
         if len(combination) in dictionary:
             dictionary[len(combination)].add(combination)
         else:
             dictionary[len(combination)] = set([combination])
-
+    del x
     for keys in dictionary:
         dictionary[keys] = list(dictionary[keys])
     puzzle["count"] = 0
