@@ -8,17 +8,17 @@ from django.http import QueryDict
 import random
 import dill
 
-with open("csw", "rb") as dill_file:
-    csw = dill.load(dill_file)
+# with open("csw", "rb") as dill_file:
+#     csw = dill.load(dill_file)
 
-with open("CSWTree", "rb") as dill_file:
-    CSWTree = dill.load(dill_file)
+# with open("CSWTree", "rb") as dill_file:
+#     CSWTree = dill.load(dill_file)
 
-# with open("dawg", "rb") as dill_file:
-#     dawg = dill.load(dill_file)
+# # with open("dawg", "rb") as dill_file:
+# #     dawg = dill.load(dill_file)
 
-with open("sevenLetterWords", "rb") as dill_file:
-    seven_letter = dill.load(dill_file)
+# with open("sevenLetterWords", "rb") as dill_file:
+#     seven_letter = dill.load(dill_file)
 
 
 def getWords(request, word):
