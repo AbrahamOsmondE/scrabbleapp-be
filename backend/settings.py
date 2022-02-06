@@ -15,10 +15,6 @@ from pathlib import Path
 import environ
 import os
 import django_on_heroku
-from api.solver import SolveState
-from api.tree import LetterTree
-from lexpy.dawg import DAWG
-import gc
 
 env = environ.Env()
 environ.Env.read_env()
@@ -69,8 +65,8 @@ INSTALLED_APPS = [
     'puzzles',
     'rest_framework',
     'corsheaders',
-    "debug_toolbar",
-    'pympler'
+    # "debug_toolbar",
+    # 'pympler'
 ]
 
 MIDDLEWARE = [
@@ -80,22 +76,22 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
 
-INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
-]
-DEBUG_TOOLBAR_PANELS = (
-    'debug_toolbar.panels.timer.TimerPanel',
-    'pympler.panels.MemoryPanel',
-)
+# INTERNAL_IPS = [
+#     # ...
+#     "127.0.0.1",
+#     # ...
+# ]
+# DEBUG_TOOLBAR_PANELS = (
+#     'debug_toolbar.panels.timer.TimerPanel',
+#     'pympler.panels.MemoryPanel',
+# )
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
