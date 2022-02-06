@@ -35,7 +35,7 @@ def getWords(request, word):
     #     dictionary[keys] = list(dictionary[keys])
     # del permutations
     # return JsonResponse(dictionary, safe=False)
-    x = CSWTree.is_word(word.upper())
+    # x = CSWTree.is_word(word.upper())
     return
 
 
