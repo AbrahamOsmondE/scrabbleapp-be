@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'puzzles',
     'rest_framework',
     'corsheaders',
+    "scout_apm.django",
     # "debug_toolbar",
     # 'pympler'
 ]
@@ -92,6 +93,14 @@ ROOT_URLCONF = 'backend.urls'
 #     'debug_toolbar.panels.timer.TimerPanel',
 #     'pympler.panels.MemoryPanel',
 # )
+
+# Scout settings
+SCOUT_MONITOR = True
+SCOUT_KEY = env("SCOUT_KEY")
+SCOUT_NAME = "scrabbleapp-be"
+# If you'd like to utilize Error Monitoring:
+SCOUT_ERRORS_ENABLED = True
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
